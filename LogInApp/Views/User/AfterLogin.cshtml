@@ -1,0 +1,89 @@
+﻿@using System.Activities.Expressions
+
+@{
+    ViewBag.Title = "AfterLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AfterLogin</h2>
+
+@if (Session["LoggedUserName"] != null)
+{
+
+    <text> Welcome @Session["LoggedUserName"].ToString() </text>
+    @Html.ActionLink("Log Out","Logout","User");
+    <div>
+        <button onclick=" appendText() " class="btn btn-default">Add </button>
+    </div>
+    <table id="example-table" class="table table-striped">
+        <thead>
+            <tr class='warning'>
+                <th>Country</th>
+                <th>Population</th>
+                <th>Date</th>
+                <th>%ge</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Chinna</td>
+                <td>1,363,480,000</td>
+                <td>March 24, 2014</td>
+                <td>19.1</td>
+            </tr>
+            <tr>
+                <td>India</td>
+                <td>1,241,900,000</td>
+                <td>March 24, 2014</td>
+                <td>17.4</td>
+            </tr>
+            <tr>
+                <td>United States</td>
+                <td>317,746,000</td>
+                <td>March 24, 2014</td>
+                <td>4.44</td>
+            </tr>
+            <tr>
+                <td>Indonesia</td>
+                <td>249,866,000</td>
+                <td>July 1, 2013</td>
+                <td>3.49</td>
+            </tr>
+            <tr>
+                <td>Brazil</td>
+                <td>201,032,714</td>
+                <td>July 1, 2013</td>
+                <td>2.81</td>
+            </tr>
+        </tbody>
+    </table>
+        <input type="submit" value="Save" id="convert-table" class="btn btn-default" /> 
+}
+
+
+@section Scripts {
+<script src="~/Scripts/tableExport.js"></script>
+    <script src="~/Scripts/jquery.base64.js"></script>
+<script src="~/Scripts/jquery.tabletojson.js"></script>
+
+    <script type="text/javascript">
+
+    function appendText() {
+
+        var name = '@Session["LoggedUserName"]';
+        alert(name);
+    }
+
+
+    $("#convert-table").click(function () {
+    //    alert("Hi,User");
+            var table = $("#example-table").tableToJSON();
+            alert("Hi,User");
+      console.log (table) ;
+       alert(JSON.stringify(table));
+    });
+
+
+</script>
+
+}
